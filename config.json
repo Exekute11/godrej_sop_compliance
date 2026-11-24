@@ -1,0 +1,94 @@
+{
+  "app": {
+    "name": "Godrej AI SOP Compliance Monitoring System",
+    "secret_key": "CHANGE-ME-IN-PRODUCTION",
+    "host": "0.0.0.0",
+    "port": 5000
+  },
+  "sop": {
+    "dwell_ms": 250,
+    "assembly_timeout_s": 60,
+    "idle_threshold_s": 0,
+    "fail_hold_s": 4,
+    "pass_hold_s": 3,
+    "step_names": [
+      "Bolt",
+      "Spring Washer",
+      "Plain Washer",
+      "Assembly"
+    ]
+  },
+  "alerts": {
+    "sound_enabled": true,
+    "sound_volume": 0.6,
+    "auto_screenshot": true,
+    "enabled_violations": [
+      "SPRING_SKIPPED",
+      "PLAIN_SKIPPED",
+      "WRONG_SEQUENCE",
+      "PLAIN_BEFORE_SPRING",
+      "ASSEMBLY_INCOMPLETE",
+      "ASSEMBLY_TIMEOUT",
+      "STATION_BYPASS",
+      "MISSING_COMPONENT",
+      "COMPONENT_DROPPED",
+      "OPERATOR_IDLE"
+    ]
+  },
+  "serial": {
+  "enabled": true,
+  "port": "COM3",
+  "baudrate": 9600,
+  "timeout_s": 1.0,
+  "write_timeout_s": 1.0,
+  "pass_value": "0",
+  "fail_value": "1",
+  "line_ending": "\\r\\n"
+  },
+  "detector": {
+    "backend": "auto",
+    "hand_model_path": "models/hand_landmarker.task",
+    "component_weights": "",
+    "component_conf": 0.4,
+    "target_fps": 30,
+    "jpeg_quality": 80
+  },
+  "cameras": [
+    {
+      "id": "demo",
+      "name": "Demo Video",
+      "source": "data/demo_videos/washer_assembly_demo.mp4",
+      "enabled": true,
+      "rois": {
+        "1": {
+          "name": "Bolt Bin",
+          "x": 0.0707465261220932,
+          "y": 0.03125,
+          "w": 0.2955729166666667,
+          "h": 0.3090277777777778
+        },
+        "2": {
+          "name": "Spring Washer Bin",
+          "x": 0.3832465261220932,
+          "y": 0.034722222222222224,
+          "w": 0.25260416666666663,
+          "h": 0.3072916666666667
+        },
+        "3": {
+          "name": "Plain Washer Bin",
+          "x": 0.6618923594554266,
+          "y": 0.026041666666666668,
+          "w": 0.28125,
+          "h": 0.3194444444444444
+        },
+        "4": {
+          "name": "Assembly Area",
+          "x": 0.6918402761220932,
+          "y": 0.43287036154005265,
+          "w": 0.25651041666666663,
+          "h": 0.3524305555555556
+        }
+      }
+    }
+  ]
+}

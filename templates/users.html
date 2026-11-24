@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Users{% endblock %}
+{% block content %}
+<section class="panel"><div class="p-head"><h4>User &amp; Role Management</h4></div>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Username</th><th>Full name</th><th>Role</th><th>Active</th><th>Last login</th><th>Actions</th></tr></thead><tbody id="uRows"></tbody></table></div></section>
+<section class="panel narrow"><div class="p-head"><h4>Add User</h4></div>
+  <div class="form-grid"><label>Username<input id="nU"></label><label>Full name<input id="nN"></label>
+  <label>Password (min 6)<input id="nP" type="password"></label><label>Role<select id="nR"></select></label></div>
+  <p class="hint"><b>viewer</b> watch only &middot; <b>operator</b> + screenshots &middot; <b>supervisor</b> + zones, settings, shift reset, exports, audit &middot; <b>admin</b> + users, cameras, detector.</p>
+  <div class="controls"><button class="btn primary" id="addUser">Create user</button></div></section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/users.js') }}"></script>{% endblock %}

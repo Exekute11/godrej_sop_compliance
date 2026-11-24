@@ -1,0 +1,108 @@
+/* SOP Monitor additions - built on the Godrej brand stylesheet (style.css). Magenta + white palette only. */
+.nav{flex-wrap:wrap;gap:10px}
+.nav-links{display:flex;gap:8px;flex-wrap:wrap}
+.pill.ghost.active{background:var(--m);color:#fff}
+.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+label.inline{display:flex;gap:8px;align-items:center;font-size:12px;font-weight:600;color:var(--mute);text-transform:uppercase;letter-spacing:.5px}
+select,input[type=text],input[type=number],input[type=password],input:not([type]){font-family:Poppins,sans-serif;font-size:13px;padding:8px 10px;border:1.5px solid var(--line);border-radius:10px;color:var(--mx);background:#fff;outline:none;transition:.25s;min-width:0}
+select:focus,input:focus{border-color:var(--m);box-shadow:0 0 0 3px var(--tint2)}
+.kpis5{grid-template-columns:repeat(5,1fr)}
+.kpi:nth-child(5){animation-delay:.33s}
+.kpi h2{font-size:38px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:20px 0}
+.panel.narrow{max-width:760px;margin:20px auto}
+.center{text-align:center}.big{font-size:64px;color:var(--m)}
+.banner.slim{padding:10px 14px;margin:10px 0}
+.banner.alert .b-icon svg{stroke:#fff}
+.stage{cursor:default}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair}
+.hud.tr{top:12px;right:12px}
+#offlineOv{background:var(--mx)}
+.sim-panel{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)}
+.sim-panel h5,.panel h5{font-size:12px;font-weight:600;color:var(--mute);text-transform:uppercase;letter-spacing:.6px;margin:12px 0 8px}
+.chip.btnchip{cursor:pointer;border:0;font-family:Poppins,sans-serif;transition:.25s}
+.chip.btnchip:hover{background:var(--m);color:#fff}.chip.btnchip:hover i{background:#fff}
+.chip.stopchip{background:var(--m);color:#fff}.chip.stopchip i{background:#fff}
+
+/* SOP progress tracker (vertical flow with arrows) */
+.tracker{list-style:none;display:flex;flex-direction:column;gap:0;margin-top:4px}
+.tracker li{position:relative;display:flex;align-items:center;gap:12px;padding:10px 14px;border:1.5px solid var(--line);border-radius:12px;background:#fff;font-size:13px;font-weight:600;color:var(--mute);transition:.4s}
+.tracker li .n{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--line);font-size:12px;flex:none;transition:.4s}
+.tracker li .st{margin-left:auto;font-size:11px;letter-spacing:.8px;text-transform:uppercase}
+.tracker li:not(:last-child)::after{content:"\2193";position:absolute;left:23px;bottom:-22px;height:22px;line-height:22px;color:var(--m);font-size:15px;font-weight:700;z-index:2}
+.tracker li:not(:last-child){margin-bottom:22px}
+.tracker li.done{background:var(--tint);border-color:var(--m);color:var(--m)}
+.tracker li.done .n{background:var(--m);border-color:var(--m);color:#fff}
+.tracker li.current{background:var(--m);border-color:var(--m);color:#fff;box-shadow:0 0 0 5px var(--tint2);animation:glow 1.6s infinite}
+.tracker li.current .n{background:#fff;color:var(--m);border-color:#fff}
+.tracker li.failed{background:#fff;border:2px dashed var(--m);color:var(--m);animation:shake .5s}
+.tracker li.failed .n{background:var(--m);color:#fff;border-color:var(--m)}
+.cyc-stats{grid-template-columns:repeat(3,1fr);row-gap:12px}
+.bars{margin-top:14px;display:flex;flex-direction:column;gap:7px}
+.bar-row{display:grid;grid-template-columns:1fr 36px;gap:8px;align-items:center;font-size:11px;color:var(--mute)}
+.bar-row .mbar{margin-top:3px}.bar-row b{color:var(--m);text-align:right}
+.timeline{max-height:340px}
+.timeline li{align-items:flex-start}
+.timeline li .grow-t{flex:1;min-width:0}
+.timeline li a.shot{font-size:11px;font-weight:600;color:var(--m);cursor:zoom-in;text-decoration:underline;white-space:nowrap}
+.timeline li.info b{font-weight:500}
+.timeline li.warn i{background:var(--tint2)}
+.timeline li.success i{background:var(--m)}
+.timeline li.success b{color:var(--m)}
+.count.alert{background:var(--md)}
+.kpi.alert .ico svg{stroke:#fff}
+.kpi.idle{border-style:dashed;border-color:var(--m);background:var(--tint)}
+
+/* forms / tables */
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.form-grid label,.form-col label{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:var(--mute);text-transform:uppercase;letter-spacing:.5px}
+.form-col{display:flex;flex-direction:column;gap:14px;margin:16px 0}
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px}
+.panel .sl,.panel .chk{margin:10px 0}
+.cam-add{margin-top:14px}
+.controls.tight{margin:0}
+.tbl td{white-space:normal}
+.tbl td:nth-child(7){min-width:0}
+.tbl .btn{padding:5px 10px;font-size:11px}
+.cam-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.cam-card{border:1.5px solid var(--line);border-radius:14px;padding:14px;transition:.3s;background:#fff}
+.cam-card:hover{box-shadow:var(--sh);transform:translateY(-3px)}
+.cam-card.fail{background:var(--m);color:#fff;animation:glow 1.6s infinite}
+.cam-card.fail *{color:#fff!important}
+.cam-card h5{margin:0 0 6px;font-size:14px;color:var(--m);text-transform:none;letter-spacing:0}
+.cam-card img{width:100%;border-radius:10px;margin:8px 0;aspect-ratio:16/9;object-fit:cover;background:#000}
+.cam-card small{display:block;color:var(--mute);font-size:11px;line-height:1.6}
+.zone-list{display:flex;flex-direction:column;gap:10px}
+.zone-item{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:center;padding:10px;border:1.5px solid var(--line);border-radius:12px;cursor:pointer;transition:.25s}
+.zone-item.sel{background:var(--m);color:#fff;border-color:var(--m)}
+.zone-item .zn{width:32px;height:32px;border-radius:50%;background:var(--tint2);color:var(--m);display:grid;place-items:center;font-weight:700}
+.zone-item.sel .zn{background:#fff}
+.zone-item input{width:100%}
+.zone-item small{display:block;font-size:10px;opacity:.75;margin-top:3px}
+.login-body{display:grid;place-items:center;min-height:100vh;background:linear-gradient(160deg,#fff 55%,var(--tint2))}
+.login-card{width:min(400px,92vw);padding:30px;animation:in .6s ease}
+.login-logo{height:54px;margin-bottom:14px}
+.login-card h3{color:var(--m);font-weight:600;font-size:18px}
+.hint{font-size:12px;color:var(--mute);line-height:1.5;display:block}
+.btn.danger{background:var(--md);color:#fff}
+.stage:fullscreen img{object-fit:contain}
+@media(max-width:1100px){.kpis5{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}}
+@media print{.nav,.controls,footer{display:none}}
+/* Dynamic camera and demo-video dropdown */
+#camSel{
+    min-width:260px;
+    max-width:420px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+#camSel optgroup{
+    color:var(--m);
+    font-weight:700;
+}
+
+#camSel option{
+    color:var(--mx);
+    font-weight:500;
+    background:#fff;
+}

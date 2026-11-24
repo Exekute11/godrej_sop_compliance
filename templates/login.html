@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign in | Godrej SOP Monitor</title>
+<link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/sop.css') }}">
+</head>
+<body class="login-body">
+<section class="login-card panel">
+  <img src="{{ url_for('static', filename='images/Godrej_Logo1.png') }}" alt="Godrej" class="login-logo">
+  <h3>AI SOP Compliance Monitoring</h3>
+  <p class="hint">Sign in with your plant credentials</p>
+  {% if error %}<div class="banner alert slim"><div><p>{{ error }}</p></div></div>{% endif %}
+  <form method="post" class="form-col">
+    <label>Username<input name="username" autocomplete="username" required autofocus></label>
+    <label>Password<input name="password" type="password" autocomplete="current-password" required></label>
+    <button class="btn primary wide" type="submit">Sign In</button>
+  </form>
+  <small class="hint">Authorised Godrej &amp; Boyce personnel only. Activity is logged.</small>
+</section>
+</body></html>

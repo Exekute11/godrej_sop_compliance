@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Settings{% endblock %}
+{% block content %}
+<section class="grid2">
+  <div class="panel"><div class="p-head"><h4>SOP Thresholds</h4></div>
+    <div class="form-grid" id="sopForm">
+      <label>Zone dwell to register a pick (ms)<input type="number" name="dwell_ms" min="50" max="5000"></label>
+      <label>Assembly timeout (s)<input type="number" name="assembly_timeout_s" min="5" max="3600"></label>
+      <label>Operator idle threshold (s)<input type="number" name="idle_threshold_s" min="3" max="3600"></label>
+      <label>FAIL display / reset hold (s)<input type="number" name="fail_hold_s" min="1" max="60"></label>
+      <label>PASS display hold (s)<input type="number" name="pass_hold_s" min="1" max="60"></label>
+    </div>
+    <div class="controls"><button class="btn primary" id="saveSop">Save thresholds</button></div></div>
+
+  <div class="panel"><div class="p-head"><h4>Alert Configuration</h4></div>
+    <label class="chk"><input type="checkbox" id="aSound"> Play alert sound on violation</label>
+    <label class="sl"><span>Alert volume <b id="volVal">60%</b></span><input type="range" id="aVol" min="0" max="1" step="0.05"></label>
+    <label class="chk"><input type="checkbox" id="aShot"> Auto-capture screenshot on violation</label>
+    <h5>Violations that raise an alert</h5>
+    <div class="check-grid" id="violChecks">
+      {% for code, label in violations.items() %}<label class="chk"><input type="checkbox" value="{{ code }}"> {{ label }}</label>{% endfor %}
+    </div>
+    <div class="controls"><button class="btn primary" id="saveAlerts">Save alert settings</button><button class="btn" id="testSound">Test sound</button></div></div>
+</section>
+
+{% if me.role == 'admin' %}
+<section class="grid2">
+  <div class="panel"><div class="p-head"><h4>Detector (admin)</h4></div>
+    <div class="form-grid" id="detForm">
+      <label>Hand backend<select name="backend"><option value="auto">Auto</option><option value="mediapipe">MediaPipe</option><option value="skin">Skin fallback</option></select></label>
+      <label>Target FPS<input type="number" name="target_fps" min="1" max="60"></label>
+      <label>Component confidence<input type="number" name="component_conf" min="0.05" max="0.99" step="0.05"></label>
+    </div>
+    <p class="hint">Backend and FPS changes apply to a camera when it is next (re)started.</p>
+    <div class="controls"><button class="btn primary" id="saveDet">Save detector settings</button></div></div>
+
+  <div class="panel"><div class="p-head"><h4>Cameras (multi-camera)</h4></div>
+    <table class="tbl"><thead><tr><th>ID</th><th>Name</th><th>Source</th><th>Status</th><th></th></tr></thead><tbody id="camRows"></tbody></table>
+    <div class="form-grid cam-add">
+      <label>ID<input id="cId" placeholder="cam2"></label><label>Name<input id="cName" placeholder="Line 2 overhead"></label>
+      <label>Source<input id="cSrc" placeholder="0, rtsp://..., file.mp4 or simulator"></label>
+    </div>
+    <div class="controls"><button class="btn primary" id="addCam">Add / update camera</button></div></div>
+</section>
+{% endif %}
+
+<section class="panel narrow"><div class="p-head"><h4>My Account</h4></div>
+  <div class="form-grid"><label>Current password<input type="password" id="pwCur"></label><label>New password (min 6)<input type="password" id="pwNew"></label></div>
+  <div class="controls"><button class="btn" id="btnPw">Change password</button></div></section>
+{% endblock %}
+{% block scripts %}<script>window.ROLE="{{ me.role }}";</script><script src="{{ url_for('static', filename='js/settings.js') }}"></script>{% endblock %}

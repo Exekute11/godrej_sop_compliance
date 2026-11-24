@@ -1,0 +1,37 @@
+# Python virtual environments
+venv/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Secrets and local files
+.env
+*.env
+config.local.json
+secrets.json
+
+# Runtime-generated data
+data/sop_monitor.db
+data/screenshots/
+data/logs/
+*.log
+
+# Generated training/build files
+runs/
+models/runs/
+build/
+dist/
+
+# Backup files
+*.tmp
+*.bak
+services/monitor_backup.py
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

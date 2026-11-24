@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Error {{ code }}{% endblock %}
+{% block content %}
+<section class="panel narrow center"><h2 class="big">{{ code }}</h2>
+<p class="hint">{{ message or ('Access denied for your role.' if code == 403 else 'Something went wrong.') }}</p>
+<a class="btn primary" href="{{ url_for('pages.dashboard') }}">Back to Dashboard</a></section>
+{% endblock %}

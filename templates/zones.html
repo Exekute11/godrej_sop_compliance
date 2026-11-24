@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Zone Editor{% endblock %}
+{% block content %}
+<div class="toolbar"><label class="inline">Camera <select id="camSel"></select></label></div>
+<section class="grid">
+  <div class="panel">
+    <div class="p-head"><h4>Zone Drawing Tool</h4><span class="count" id="zInfo">Select a zone, then drag on the feed</span></div>
+    <div class="stage" id="zStage"><img id="zFeed" alt="feed" draggable="false"><canvas id="zCanvas"></canvas></div>
+    <div class="controls">
+      <button class="btn primary" id="btnSave">Save ROIs</button>
+      <button class="btn" id="btnReload">Discard changes</button>
+      <button class="btn" id="btnDefault">Reset to default layout</button>
+    </div>
+  </div>
+  <div class="side"><div class="panel"><div class="p-head"><h4>Regions of Interest</h4></div>
+    <div id="zoneList" class="zone-list"></div>
+    <p class="hint">Coordinates are stored normalised (0&ndash;1) so they stay valid if camera resolution changes. Drag inside an existing zone to move it; drag on empty feed to redraw the selected zone.</p>
+  </div></div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/zones.js') }}"></script>{% endblock %}

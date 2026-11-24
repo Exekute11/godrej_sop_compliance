@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block navextra %}
+<span class="pill" id="livePill"><i class="dot"></i><span id="liveText">LIVE</span></span>
+<span class="pill ghost"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg><span id="fps">0</span> FPS</span>
+{% endblock %}
+{% block content %}
+<div class="toolbar">
+  <label class="inline">Camera <select id="camSel"></select></label>
+  <span class="chip keep" id="backendChip"><i></i>detector</span>
+  <span class="chip keep" id="shiftChip"><i></i>shift</span>
+</div>
+
+<!-- 2. SOP Status Banner -->
+<section class="banner ok" id="banner">
+  <div class="b-icon" id="bIcon"><svg viewBox="0 0 24 24"><path d="m5 12 5 5L20 7"/></svg></div>
+  <div><h3 id="bTitle">Ready</h3><p id="bText">Waiting for operator</p></div>
+  <span class="b-tag" id="bTag">READY</span>
+</section>
+
+<!-- 6-10 KPIs -->
+<section class="kpis kpis5">
+  <article class="kpi" id="violCard"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3 2 21h20zM12 10v5M12 18v.5"/></svg></div><span>Violations</span><h2 data-k="violations">0</h2><em>This shift</em></article>
+  <article class="kpi"><div class="ico"><svg viewBox="0 0 24 24"><path d="m5 12 5 5L20 7"/></svg></div><span>Cycles Completed</span><h2 data-k="cycles_total">0</h2><em id="cycSplit">0 pass / 0 fail</em></article>
+  <article class="kpi"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/></svg></div><span>Pass Rate</span><h2 data-k="pass_rate">0</h2><em>percent</em></article>
+  <article class="kpi"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><span>Avg Cycle Time</span><h2 data-k="avg_cycle_time">0</h2><em>seconds (passed cycles)</em></article>
+  <article class="kpi" id="idleCard"><div class="ico"><svg viewBox="0 0 24 24"><path d="M6 2h12M6 22h12M7 2v4l5 6-5 6v4M17 2v4l-5 6 5 6v4"/></svg></div><span>Operator Idle Time</span><h2 data-k="idle_time">0</h2><em id="idleNow">seconds this shift</em></article>
+</section>
+
+<section class="grid">
+  <div class="panel video">
+    <div class="p-head"><h4>Live Monitoring Feed</h4>
+      <div class="seg" id="viewSeg"><button data-v="feed" class="on">Live</button><button data-v="stats">Shift</button></div></div>
+    <div class="stage" id="stage">
+      <img id="feed" alt="Live camera feed">
+      <div class="hud tr" id="hudBackend">AI &middot; ZONE HYBRID</div>
+      <div class="paused" id="offlineOv"><svg viewBox="0 0 24 24"><path d="M3 3l18 18M10 5h6l2 3h2v9M4 8h2m-2 0v10h13"/></svg>Camera Offline</div>
+    </div>
+    <div class="controls">
+      <button class="btn primary" id="btnShot"><svg viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Screenshot</button>
+      <button class="btn" id="btnFull"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>Fullscreen</button>
+      <button class="btn" id="btnSound"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9zM17 8a5 5 0 0 1 0 8"/></svg><span id="soundLbl">Sound On</span></button>
+      <a class="btn" id="btnCsv" href="#" data-nofade><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 21h16"/></svg>Export CSV</a>
+      <button class="btn accent sup-only" id="btnReset" hidden><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>Shift Reset</button>
+    </div>
+    <div class="sim-panel sup-only" id="simPanel" hidden>
+      <h5>Simulator &middot; demo scenarios</h5>
+      <div class="chips" id="simBtns"></div>
+    </div>
+  </div>
+
+  <div class="side">
+    <!-- 3 + 4. Current cycle / stage -->
+    <div class="panel" id="cycPanel">
+      <div class="p-head"><h4>Current Cycle Status</h4><span class="count" id="cycNo">Cycle 0</span></div>
+      <div class="cyc-body">
+        <div class="ring" id="ring"><svg viewBox="0 0 80 80"><circle class="trk" cx="40" cy="40" r="34"/><circle class="bar" id="ringBar" cx="40" cy="40" r="34" stroke-dasharray="213.6" stroke-dashoffset="213.6"/></svg>
+          <div class="ring-t"><b id="ringT">0</b><small>sec</small></div></div>
+        <div class="cyc-info"><small>Current Workflow Stage</small><b id="stageLbl">Waiting For Bolt</b><small id="stageSub">Timeout 60s</small></div>
+      </div>
+      <!-- 5. Tracker -->
+      <ol class="tracker" id="tracker"></ol>
+    </div>
+
+    <!-- 13. Shift statistics -->
+    <div class="panel">
+      <div class="p-head"><h4>Shift Statistics</h4><span class="count" id="shiftNo">Shift</span></div>
+      <div class="cyc-stats" id="shiftStats"></div>
+      <div class="bars" id="violBars"></div>
+    </div>
+  </div>
+</section>
+
+<section class="grid2">
+  <div class="panel"><div class="p-head"><h4>Event Timeline</h4><span class="count" id="evCount">0</span></div>
+    <ul class="timeline" id="timeline"><li class="empty">No events yet.</li></ul></div>
+  <div class="panel"><div class="p-head"><h4>Alert History</h4><span class="count" id="alCount">0</span></div>
+    <ul class="timeline" id="alerts"><li class="empty">No alerts this shift.</li></ul></div>
+</section>
+<div class="lightbox" id="lightbox"><img id="lbImg" alt=""></div>
+{% endblock %}
+{% block scripts %}<script>window.ROLE="{{ me.role }}";window.EVENT_LABELS={{ labels|tojson }};</script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>{% endblock %}

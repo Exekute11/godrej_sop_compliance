@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Supervisor{% endblock %}
+{% block content %}
+<section class="kpis kpis5" id="supKpis"></section>
+<section class="grid2">
+  <div class="panel"><div class="p-head"><h4>Station Overview</h4></div><div id="camCards" class="cam-cards"></div></div>
+  <div class="panel"><div class="p-head"><h4>Recent Violations</h4><span class="count" id="rcCount">0</span></div><ul class="timeline" id="recent"></ul></div>
+</section>
+<section class="panel"><div class="p-head"><h4>Shift History</h4>
+  <div class="controls tight"><a class="btn" href="/api/export/cycles.csv" data-nofade>Cycles CSV</a><a class="btn" href="/api/export/events.csv" data-nofade>Events CSV</a><a class="btn" href="/api/export/shift.csv" data-nofade>Shift CSV</a>
+  <button class="btn accent" id="btnReset">Shift Reset</button></div></div>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>#</th><th>Started</th><th>Ended</th><th>Started by</th><th>Status</th></tr></thead><tbody id="shiftRows"></tbody></table></div></section>
+{% endblock %}
+{% block scripts %}<script>window.EVENT_LABELS={{ labels|tojson }};</script><script src="{{ url_for('static', filename='js/supervisor.js') }}"></script>{% endblock %}

@@ -1,0 +1,9 @@
+Flask>=3.0
+Werkzeug>=3.0
+opencv-python>=4.9
+numpy>=1.26
+mediapipe>=0.10.14
+rich
+pyserial
+# Optional: YOLO component detector (place weights at models/components.pt)
+# ultralytics>=8.2
